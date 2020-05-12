@@ -1,0 +1,7 @@
+# How to backup contents of Dropbox
+
+Run `./rclone config --config rclone.conf` to tell the backup program how to connect to your account. When prompted, type "n" to create a new remote. Name the remote "dbx". Press the number 8 to choose Dropbox. Leave the client_id and client_secret blank. Do not edit the advanced config. Type "y" to use auto-config. A web browser should open asking you to authorize "rclone" to interact with your Dropbox account. Rclone is the backup program that does all the heavy lifting (it is an open source program available on GitHub). Back in the terminal, type "y" if everything looks good. Finally, type "q" to finish the configuration.
+
+Next, run the script `backup.sh`, and when prompted, press the 'y' key to continue. The initial backup can take some time, but subsequent backups should be quick. On subsequent backups, only differences are downloaded.
+
+If someone deletes a file on the Dropbox, the file will NOT be deleted from the backup. It will, however, be moved into a separate, dated directory. For example, let's assume you have photos in a Dropbox account and you back it up using this script. The photos will be present on the local filesystem in a directory called, say, "backup". If one of the photos is deleted on Dropbox and you run this backup script again, the deleted photo will be moved from the "backup" directory to the dated directory "backup-YYYY-MM-DD". This way, the "backup" directory is the same as the Dropbox but you do not lose data.
